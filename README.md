@@ -1,24 +1,10 @@
-# README
+# Mentor-Bee API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Find the perfect mentor.
 
-Things you may want to cover:
+### Created by:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [Freddie Lawson](https://github.com/freddie1221)
+* [Kar-ho Lee](https://github.com/leekarho)
+* [Becky Sedgwick](https://github.com/rebeccasedgwick)
+* [Esam Al-Dabagh](https://github.com/EsamAl-Dabagh)
