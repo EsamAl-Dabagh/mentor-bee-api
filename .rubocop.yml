@@ -9,6 +9,9 @@ AllCops:
     - '**/bin/**/*'
     - 'Gemfile'
     - 'config/**/*'
+    - 'channels/*'
+    - 'mailers/*'
+    - 'jobs/*'
 
 Performance:
   Exclude:
