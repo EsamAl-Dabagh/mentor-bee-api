@@ -38,7 +38,7 @@ I want to be able to create a mentor profile
 ```
 
 ----
-##Models & Associations
+## Models & Associations
 
 **Users**  
 CRC card:
@@ -91,7 +91,7 @@ CRC card:
 |------------------|---------------|
 | user id          | User          |
 | bio              |               |
-| skills           |               |
+| interests        |               |
 
 
 Database tables: Mentees  

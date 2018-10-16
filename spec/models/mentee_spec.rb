@@ -1,0 +1,13 @@
+require 'rails_helper'
+
+RSpec.describe Mentee, type: :model do
+  context "belongs to a user" do
+    it { should belong_to(:user) }
+  end
+
+  context "has bio, skills and user_id" do
+    it { should validate_presence_of(:user_id) }
+    it { should validate_presence_of(:bio) }
+    it { should validate_presence_of(:interests) }
+  end
+end

@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_125230) do
+ActiveRecord::Schema.define(version: 2018_10_16_131505) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "mentees", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "bio"
+    t.string "interests"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mentees_on_user_id"
+  end
 
   create_table "mentors", force: :cascade do |t|
     t.bigint "user_id"
@@ -27,10 +37,11 @@ ActiveRecord::Schema.define(version: 2018_10_16_125230) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "pic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pic"
   end
 
+  add_foreign_key "mentees", "users"
   add_foreign_key "mentors", "users"
 end
