@@ -46,4 +46,7 @@ end
 group :test do
   gem "simplecov", require: false
   gem "simplecov-console", require: false
+  gem "factory_bot_rails"
+  gem "shoulda-matchers"
+  gem "database_cleaner"
 end
