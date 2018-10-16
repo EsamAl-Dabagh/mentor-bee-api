@@ -32,7 +32,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-require 'database_cleaner'
+require "database_cleaner"
 
 # configure shoulda matchers to use rspec
 Shoulda::Matchers.configure do |config|
@@ -79,7 +79,7 @@ RSpec.configure do |config|
   end
 
   config.around(:each) do |example|
-    DatabaseCleaner.cleaning do 
+    DatabaseCleaner.cleaning do
       example.run
     end
   end
