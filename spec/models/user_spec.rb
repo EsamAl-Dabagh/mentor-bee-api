@@ -10,4 +10,9 @@ RSpec.describe User, type: :model do
   context "email is unique" do
     it { should validate_uniqueness_of(:email) }
   end
+
+  context "can have mentor and mentee associations" do
+    it { should have_one(:mentee) }
+    it { should have_one(:mentor) }
+  end
 end

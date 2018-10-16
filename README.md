@@ -11,6 +11,32 @@
 * [Becky Sedgwick](https://github.com/rebeccasedgwick)
 * [Esam Al-Dabagh](https://github.com/EsamAl-Dabagh)
 
+### Quickstart Guide
+Clone this repo:
+```
+$ git clone git@github.com:EsamAl-Dabagh/mentor-bee-api.git
+```
+Run bundler to install all dependencies:
+```
+$ bundle install
+```
+Create the database tables, and run migrations:
+```
+$ rails db:create
+$ rails db:migrate
+```
+You will also need to run the migrations in the testing environment:
+```
+$ rails db:migrate RAILS_ENV="test"
+```
+
+To run the linter and then the test suite:
+```
+$ rubocop
+$ rspec
+```
+Test coverage will be displayed after the results of the tests, as Simplecov is configured to automatically run.
+
 ### User Stories
 
 ```
@@ -39,6 +65,11 @@ I want to be able to create a mentor profile
 
 ----
 ## Models & Associations
+
+Notes on associations:
+- User has_one mentor / mentee, this has been set to optional (i.e. if a user wanted to only be a mentor or mentee).
+- Association of `has_one` has been used, so that a User only has one set of info for them as either a Mentor or Mentee: they cannot have multiple 'profiles' as a Mentee, for example.
+- A User may be a mentor to multiple mentees (or be a mentee to multiple users); however as the Mentor and Mentee tables are for the bio / interest / skills data, any given user can only appear once in these tables. The actual mentorship relationships (of which they can have multiple) are held in the Mentorships table.
 
 **Users**  
 CRC card:
@@ -120,8 +151,8 @@ Database table: Mentorships
 | 02 | 02        | 01        |
 | 03 | 01        | 03        |
 
-_Having a Mentorships table allows each mentoring relationship to have an unique ID_  
-This table shows mentoring relationships:  
-Alice mentors Bob  
-Emma mentors Charlie  
-Dave mentors Alice  
+- Having a Mentorships table allows each mentoring relationship to have an unique ID
+- This table shows mentoring relationships:  
+  - Alice mentors Bob  
+  - Emma mentors Charlie  
+  - Dave mentors Alice  
