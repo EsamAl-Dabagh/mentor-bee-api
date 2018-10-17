@@ -34,6 +34,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rubocop"
   gem "rspec-rails"
+  gem "faker"
 end
 
 group :development do
@@ -46,4 +47,7 @@ end
 group :test do
   gem "simplecov", require: false
   gem "simplecov-console", require: false
+  gem "factory_bot_rails"
+  gem "shoulda-matchers"
+  gem "database_cleaner"
 end
