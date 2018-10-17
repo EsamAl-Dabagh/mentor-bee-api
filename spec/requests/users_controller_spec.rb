@@ -15,4 +15,21 @@ RSpec.describe UsersController, type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "POST /users" do
+
+    let(:valid_attributes) { { user: { name: "Albus Dumbledore", email: "email@email.com", password: "123456", pic: "nil" } } }
+
+    context "when the request is valid" do
+      before { post "/users", params: valid_attributes }
+
+      it "creates a user" do
+        expect(json["name"]).to eq("Albus Dumbledore")
+      end
+
+      it "returns status code 201" do
+        expect(response).to have_http_status(201)
+      end
+    end
+  end
 end
