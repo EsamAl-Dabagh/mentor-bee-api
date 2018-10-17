@@ -43,13 +43,26 @@ RSpec.describe UsersController, type: :request do
 
   describe "GET /users/:id" do
     let(:user_id) { users.first.id }
-    before { get "/users/#{user_id}"}
-
-    it "returns a user" do
-      expect(json["id"]).to eq(user_id)
+    let(:nonexistent_user_id) { 100 }
+    
+    context "when the user exists" do
+      before { get "/users/#{user_id}"}
+      it "returns a user" do
+        expect(json["id"]).to eq(user_id)
+      end
+      it "returns a status code 200" do
+        expect(response).to have_http_status(200)
+      end
     end
-    it "returns a status code 200" do
-      expect(response).to have_http_status(200)
+
+    context "when the user doesn't exist" do
+      before { get "/users/#{nonexistent_user_id}"}
+      it "returns a failure message" do
+        expect(response.body).to eq("{\"message\":\"Couldn't find User\"}")
+      end
+      it "returns status code 404" do
+        expect(response).to have_http_status(404)
+      end
     end
   end
 end
