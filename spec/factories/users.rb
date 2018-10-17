@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::HarryPotter.character }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
-    pic nil
+    pic { nil }
   end
 end
