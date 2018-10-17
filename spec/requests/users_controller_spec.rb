@@ -19,7 +19,7 @@ RSpec.describe UsersController, type: :request do
   describe "POST /users" do
     let(:valid_attributes) { { user: { name: "Albus Dumbledore", email: "email@email.com", password: "123456", pic: "nil" } } }
     let(:invalid_attributes) { { user: { name: "Albus Dumbledore" } } }
-    
+
     context "when the request is valid" do
       before { post "/users", params: valid_attributes }
       it "creates a user" do
@@ -44,9 +44,9 @@ RSpec.describe UsersController, type: :request do
   describe "GET /users/:id" do
     let(:user_id) { users.first.id }
     let(:nonexistent_user_id) { 100 }
-    
+
     context "when the user exists" do
-      before { get "/users/#{user_id}"}
+      before { get "/users/#{user_id}" }
       it "returns a user" do
         expect(json["id"]).to eq(user_id)
       end
@@ -56,7 +56,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when the user doesn't exist" do
-      before { get "/users/#{nonexistent_user_id}"}
+      before { get "/users/#{nonexistent_user_id}" }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Couldn't find User\"}")
       end
