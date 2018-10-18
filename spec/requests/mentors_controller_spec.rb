@@ -16,6 +16,27 @@ RSpec.describe MentorsController, type: :request do
     end
   end
 
+  describe "GET /mentors/:id" do
+    let(:mentor) { create(:mentor) }
+    
+    context "request is valid" do
+      before { get "/mentors/#{mentor.id}" }
+      it "returns mentors" do
+        expect(json["skill"]).to eq(mentor.skill)
+      end
+    end
+    context "request is invalid", focus: true do
+      before { get "/mentors/500" }
+      it "returns a failure message" do
+        expect(response.body).to eq("{\"message\":\"Couldn't find Mentor\"}")
+      end
+      it "returns status code 422" do
+        expect(response).to have_http_status(404)
+      end
+    end
+
+  end
+
   describe "POST /mentors" do
     let(:user) { create(:user) }
     let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } } }
@@ -30,7 +51,7 @@ RSpec.describe MentorsController, type: :request do
         expect(response).to have_http_status(201)
       end
     end
-    context "request is invalid", focus: true do
+    context "request is invalid" do
       before { post "/mentors", params: invalid_attributes }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Validation failed: Skill can't be blank\"}")
@@ -40,4 +61,6 @@ RSpec.describe MentorsController, type: :request do
       end
     end
   end
+
+
 end

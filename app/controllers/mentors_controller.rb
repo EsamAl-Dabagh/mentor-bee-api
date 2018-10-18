@@ -10,6 +10,11 @@ class MentorsController < ApplicationController
     json_response(@mentor, :created)
   end
 
+  def show
+    @user = Mentor.find_by!(id: params[:id])
+    json_response(@user, :ok)
+  end
+
   private
     def mentor_params
       params.require(:mentor).permit(:user_id, :bio, :skill)
