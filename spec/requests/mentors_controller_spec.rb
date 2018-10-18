@@ -19,15 +19,24 @@ RSpec.describe MentorsController, type: :request do
   describe "POST /mentors" do
     let(:user) { create(:user) }
     let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } } }
+    let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum"} } }
 
     context "request is valid" do
       before { post "/mentors", params: valid_attributes }
-
       it "creates a mentor" do
         expect(json["skill"]).to eq("Lumos")
       end
       it "returns status code 201" do
         expect(response).to have_http_status(201)
+      end
+    end
+    context "request is invalid", focus: true do
+      before { post "/mentors", params: invalid_attributes }
+      it "returns a failure message" do
+        expect(response.body).to eq("{\"message\":\"Validation failed: Skill can't be blank\"}")
+      end
+      it "returns status code 422" do
+        expect(response).to have_http_status(422)
       end
     end
   end
