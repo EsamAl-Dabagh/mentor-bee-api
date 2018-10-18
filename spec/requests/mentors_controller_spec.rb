@@ -15,4 +15,20 @@ RSpec.describe MentorsController, type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "POST /mentors" , focus: true do
+    let(:user_double) { double }
+    let!(:new_mentor) { create(:mentor)}
+    let(:valid_attributes) {{mentor: new_mentor}}
+    context "request is valid" do
+      before { post "/mentors", params: valid_attributes }
+
+      it "creates a mentor" do
+        expect(json).to eq("Lumos")
+      end
+      it "returns status code 201" do
+        expect(response).to have_http_status(201)
+      end
+    end
+  end
 end
