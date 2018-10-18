@@ -13,9 +13,9 @@ class UsersController < ApplicationController
     @user = User.find_by!(id: params[:id])
     json_response(@user, :ok)
   end
-  
+
   private
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :pic)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :pic)
+    end
 end

@@ -8,10 +8,6 @@ RSpec.describe Mentor, type: :model do
   context "has bio, skills and user_id" do
     it { should validate_presence_of(:user_id) }
     it { should validate_presence_of(:bio) }
-    it { should validate_presence_of(:skills) }
-  end
-
-  context "mentor's user is unique", focus: true do
-    it { should validate_uniqueness_of(:user_id) }
+    it { should validate_presence_of(:skill) }
   end
 end
