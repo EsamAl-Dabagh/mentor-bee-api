@@ -18,15 +18,15 @@ RSpec.describe MentorsController, type: :request do
 
   describe "GET /mentors/:id" do
     let(:mentor) { create(:mentor) }
-    
+
     context "request is valid" do
       before { get "/mentors/#{mentor.id}" }
       it "returns mentors" do
         expect(json["skill"]).to eq(mentor.skill)
       end
     end
-    context "request is invalid", focus: true do
-      before { get "/mentors/500" }
+    context "request is invalid" do
+      before { get "/mentors/0" }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Couldn't find Mentor\"}")
       end
