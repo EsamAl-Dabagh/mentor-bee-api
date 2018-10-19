@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :mentors
+  resources :mentees
 
 end
