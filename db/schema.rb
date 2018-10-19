@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_142349) do
-
+ActiveRecord::Schema.define(version: 2018_10_19_112528) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +32,15 @@ ActiveRecord::Schema.define(version: 2018_10_18_142349) do
     t.index ["user_id"], name: "index_mentors_on_user_id", unique: true
   end
 
+  create_table "mentorships", force: :cascade do |t|
+    t.bigint "mentor_id"
+    t.bigint "mentee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mentee_id"], name: "index_mentorships_on_mentee_id"
+    t.index ["mentor_id"], name: "index_mentorships_on_mentor_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -44,4 +52,6 @@ ActiveRecord::Schema.define(version: 2018_10_18_142349) do
 
   add_foreign_key "mentees", "users"
   add_foreign_key "mentors", "users"
+  add_foreign_key "mentorships", "mentees"
+  add_foreign_key "mentorships", "mentors"
 end
