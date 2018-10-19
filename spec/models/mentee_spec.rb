@@ -8,6 +8,6 @@ RSpec.describe Mentee, type: :model do
   context "has bio, skills and user_id" do
     it { should validate_presence_of(:user_id) }
     it { should validate_presence_of(:bio) }
-    it { should validate_presence_of(:interests) }
+    it { should validate_presence_of(:interest) }
   end
 end
