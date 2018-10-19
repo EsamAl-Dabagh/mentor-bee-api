@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MenteesController, type: :request, focus: true do
+RSpec.describe MenteesController, type: :request do
   let!(:mentees) { create_list(:mentee, 5) }
 
   describe "GET /mentees" do
