@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Mentorship, type: :model do
   context "has a mentor and mentee" do
