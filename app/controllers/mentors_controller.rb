@@ -6,7 +6,6 @@ class MentorsController < ApplicationController
 
   def create
     @mentor = Mentor.create!(mentor_params)
-    p @mentor
     json_response(@mentor, :created)
   end
 
