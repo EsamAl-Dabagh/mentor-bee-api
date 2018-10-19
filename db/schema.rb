@@ -10,26 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_131505) do
+ActiveRecord::Schema.define(version: 2018_10_18_142349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "mentees", force: :cascade do |t|
     t.bigint "user_id"
     t.string "bio"
-    t.string "interests"
+    t.string "interest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_mentees_on_user_id"
+    t.index ["user_id"], name: "index_mentees_on_user_id", unique: true
   end
 
   create_table "mentors", force: :cascade do |t|
     t.bigint "user_id"
     t.string "bio"
-    t.string "skills"
+    t.string "skill"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_mentors_on_user_id"
+    t.index ["user_id"], name: "index_mentors_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

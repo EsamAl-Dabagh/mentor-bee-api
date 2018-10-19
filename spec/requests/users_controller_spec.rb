@@ -43,7 +43,7 @@ RSpec.describe UsersController, type: :request do
 
   describe "GET /users/:id" do
     let(:user_id) { users.first.id }
-    let(:nonexistent_user_id) { 100 }
+    let(:nonexistent_user_id) { 0 }
 
     context "when the user exists" do
       before { get "/users/#{user_id}" }
