@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :mentorship do
-    mentor { nil }
-    mentee { nil }
+    mentor
+    mentee
   end
 end
