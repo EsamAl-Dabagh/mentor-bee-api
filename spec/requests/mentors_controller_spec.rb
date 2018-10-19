@@ -34,13 +34,12 @@ RSpec.describe MentorsController, type: :request do
         expect(response).to have_http_status(404)
       end
     end
-
   end
 
   describe "POST /mentors" do
     let(:user) { create(:user) }
     let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } } }
-    let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum"} } }
+    let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum" } } }
 
     context "request is valid" do
       before { post "/mentors", params: valid_attributes }
@@ -61,6 +60,4 @@ RSpec.describe MentorsController, type: :request do
       end
     end
   end
-
-
 end
