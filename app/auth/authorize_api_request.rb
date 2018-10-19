@@ -1,2 +1,2 @@
-class AuthorizeApiRequest
-end
+# class AuthorizeApiRequest
+# end
