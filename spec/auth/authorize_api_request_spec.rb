@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AuthorizeApiRequest, focus: true do
+RSpec.describe AuthorizeApiRequest do
   let(:user) { create(:user) }
   let(:header) { { "Authorization" => token_generator(user.id) } }
 
@@ -29,6 +29,14 @@ RSpec.describe AuthorizeApiRequest, focus: true do
 
         it "raises the InvalidToken error" do
           expect { invalid_request_object.call }.to raise_error(ExceptionHandler::InvalidToken, "Invalid token")
+        end
+      end
+
+      context "when token is expired (>24hr)" do
+        let(:header) { { "Authorization" => expired_token_generator(user.id) } }
+
+        it "raises expired signature error" do
+          expect { valid_request_object.call }.to raise_error(ExceptionHandler::InvalidToken, "Signature has expired")
         end
       end
     end
