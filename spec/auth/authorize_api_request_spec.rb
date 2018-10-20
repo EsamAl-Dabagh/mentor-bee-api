@@ -7,7 +7,7 @@ RSpec.describe AuthorizeApiRequest do
   subject(:valid_request_object) { described_class.get_user(header["Authorization"]) }
   subject(:invalid_request_object) { described_class.get_user(nil) }
 
-  describe "#call" do
+  describe "#get_user" do
     context "when request is valid" do
       it "returns the user object" do
         result = valid_request_object
