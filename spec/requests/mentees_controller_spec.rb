@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MenteesController, type: :request, focus: true do
+RSpec.describe MenteesController, type: :request do
   let(:user) { create(:user) }
   let!(:mentees) { create_list(:mentee, 5) }
   let(:headers) { valid_headers }
@@ -40,7 +40,7 @@ RSpec.describe MenteesController, type: :request, focus: true do
 
   describe "POST /mentees" do
     let(:user) { create(:user) }
-    
+
     let(:valid_attributes) { { mentee: { user_id: user.id, bio: "Expecto Patronum", interest: "Lumos" } }.to_json }
 
     let(:invalid_attributes) { { mentee: { user_id: user.id, bio: "Expecto Patronum" } }.to_json }

@@ -1,10 +1,12 @@
 require "rails_helper"
 
-RSpec.describe MentorsController, type: :request do
+RSpec.describe MentorsController, type: :request, focus: true do
   let!(:mentors) { create_list(:mentor, 5) }
+  let(:user) { create(:user) }
+  let(:headers) { valid_headers }
 
   describe "GET /mentors" do
-    before { get "/mentors" }
+    before { get "/mentors", params: {}, headers: headers }
 
     it "returns mentors" do
       expect(json).not_to be_empty
@@ -20,13 +22,13 @@ RSpec.describe MentorsController, type: :request do
     let(:mentor) { create(:mentor) }
 
     context "request is valid" do
-      before { get "/mentors/#{mentor.id}" }
+      before { get "/mentors/#{mentor.id}", params: {}, headers: headers }
       it "returns mentors" do
         expect(json["skill"]).to eq(mentor.skill)
       end
     end
     context "request is invalid" do
-      before { get "/mentors/0" }
+      before { get "/mentors/0", params: {}, headers: headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Couldn't find Mentor\"}")
       end
@@ -38,11 +40,13 @@ RSpec.describe MentorsController, type: :request do
 
   describe "POST /mentors" do
     let(:user) { create(:user) }
-    let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } } }
-    let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum" } } }
+
+    let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } }.to_json }
+    
+    let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum" } }.to_json }
 
     context "request is valid" do
-      before { post "/mentors", params: valid_attributes }
+      before { post "/mentors", params: valid_attributes, headers: headers }
       it "creates a mentor" do
         expect(json["skill"]).to eq("Lumos")
       end
@@ -51,7 +55,7 @@ RSpec.describe MentorsController, type: :request do
       end
     end
     context "request is invalid" do
-      before { post "/mentors", params: invalid_attributes }
+      before { post "/mentors", params: invalid_attributes, headers: headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Validation failed: Skill can't be blank\"}")
       end
