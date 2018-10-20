@@ -1,5 +1,5 @@
 class JsonWebToken
-  SECRET_SIGNATURE = Rails.application.secrets.secret_key_base
+  SECRET_SIGNATURE = MentorBeeApi::Application.credentials.secret_key_base
 
   def self.encode(user, expiry = 24.hours.from_now)
     user[:expiry] = expiry.to_i
