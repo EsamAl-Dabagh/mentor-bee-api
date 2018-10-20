@@ -1,12 +1,10 @@
 require "rails_helper"
 
 RSpec.describe MentorshipsController, type: :request do
-  let(:headers) { valid_headers }
-
   describe "GET /mentorships" do
     let!(:mentorships) { create_list(:mentorship, 5) }
 
-    before { get "/mentorships", params: {}, headers: headers }
+    before { get "/mentorships", params: {}, headers: valid_headers }
     it "returns mentorships" do
       expect(json).not_to be_empty
       expect(json.size).to eq(5)
@@ -20,7 +18,7 @@ RSpec.describe MentorshipsController, type: :request do
     let(:valid_attributes) { { mentorship: { mentor_id: mentor.id, mentee_id: mentee.id } }.to_json }
 
     context "request is valid" do
-      before { post "/mentorships", params: valid_attributes, headers: headers }
+      before { post "/mentorships", params: valid_attributes, headers: valid_headers }
       it "creates a mentorship" do
         expect(json["mentor_id"]).to eq(mentor.id)
       end

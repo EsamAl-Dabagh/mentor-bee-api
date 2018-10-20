@@ -2,10 +2,9 @@ require "rails_helper"
 
 RSpec.describe MenteesController, type: :request do
   let!(:mentees) { create_list(:mentee, 5) }
-  let(:headers) { valid_headers }
 
   describe "GET /mentees" do
-    before { get "/mentees", params: {}, headers: headers }
+    before { get "/mentees", params: {}, headers: valid_headers }
 
     it "returns mentees" do
       expect(json).not_to be_empty
@@ -21,13 +20,13 @@ RSpec.describe MenteesController, type: :request do
     let(:mentee) { create(:mentee) }
 
     context "request is valid" do
-      before { get "/mentees/#{mentee.id}", params: {}, headers: headers }
+      before { get "/mentees/#{mentee.id}", params: {}, headers: valid_headers }
       it "returns mentees" do
         expect(json["interest"]).to eq(mentee.interest)
       end
     end
     context "request is invalid" do
-      before { get "/mentees/0", params: {}, headers: headers }
+      before { get "/mentees/0", params: {}, headers: valid_headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Couldn't find Mentee\"}")
       end
@@ -45,7 +44,7 @@ RSpec.describe MenteesController, type: :request do
     let(:invalid_attributes) { { mentee: { user_id: user.id, bio: "Expecto Patronum" } }.to_json }
 
     context "request is valid" do
-      before { post "/mentees", params: valid_attributes, headers: headers }
+      before { post "/mentees", params: valid_attributes, headers: valid_headers }
       it "creates a mentee" do
         expect(json["interest"]).to eq("Lumos")
       end
@@ -54,7 +53,7 @@ RSpec.describe MenteesController, type: :request do
       end
     end
     context "request is invalid" do
-      before { post "/mentees", params: invalid_attributes, headers: headers }
+      before { post "/mentees", params: invalid_attributes, headers: valid_headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Validation failed: Interest can't be blank\"}")
       end

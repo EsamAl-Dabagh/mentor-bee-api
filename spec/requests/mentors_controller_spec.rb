@@ -2,10 +2,9 @@ require "rails_helper"
 
 RSpec.describe MentorsController, type: :request do
   let!(:mentors) { create_list(:mentor, 5) }
-  let(:headers) { valid_headers }
 
   describe "GET /mentors" do
-    before { get "/mentors", params: {}, headers: headers }
+    before { get "/mentors", params: {}, headers: valid_headers }
 
     it "returns mentors" do
       expect(json).not_to be_empty
@@ -21,13 +20,13 @@ RSpec.describe MentorsController, type: :request do
     let(:mentor) { create(:mentor) }
 
     context "request is valid" do
-      before { get "/mentors/#{mentor.id}", params: {}, headers: headers }
+      before { get "/mentors/#{mentor.id}", params: {}, headers: valid_headers }
       it "returns mentors" do
         expect(json["skill"]).to eq(mentor.skill)
       end
     end
     context "request is invalid" do
-      before { get "/mentors/0", params: {}, headers: headers }
+      before { get "/mentors/0", params: {}, headers: valid_headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Couldn't find Mentor\"}")
       end
@@ -45,7 +44,7 @@ RSpec.describe MentorsController, type: :request do
     let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum" } }.to_json }
 
     context "request is valid" do
-      before { post "/mentors", params: valid_attributes, headers: headers }
+      before { post "/mentors", params: valid_attributes, headers: valid_headers }
       it "creates a mentor" do
         expect(json["skill"]).to eq("Lumos")
       end
@@ -54,7 +53,7 @@ RSpec.describe MentorsController, type: :request do
       end
     end
     context "request is invalid" do
-      before { post "/mentors", params: invalid_attributes, headers: headers }
+      before { post "/mentors", params: invalid_attributes, headers: valid_headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Validation failed: Skill can't be blank\"}")
       end
