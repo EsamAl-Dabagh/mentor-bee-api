@@ -2,13 +2,14 @@ require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
   let!(:users) { create_list(:user, 5) }
+  let(:headers) { valid_headers }
 
   describe "GET /users" do
-    before { get "/users" }
+    before { get "/users", params: {}, headers: headers }
 
     it "returns users" do
       expect(json).not_to be_empty
-      expect(json.size).to eq(5)
+      expect(json.size).to eq(User.count)
     end
 
     it "returns status code 200" do
@@ -46,7 +47,7 @@ RSpec.describe UsersController, type: :request do
     let(:nonexistent_user_id) { 0 }
 
     context "when the user exists" do
-      before { get "/users/#{user_id}" }
+      before { get "/users/#{user_id}", headers: headers }
       it "returns a user" do
         expect(json["id"]).to eq(user_id)
       end
@@ -56,7 +57,7 @@ RSpec.describe UsersController, type: :request do
     end
 
     context "when the user doesn't exist" do
-      before { get "/users/#{nonexistent_user_id}" }
+      before { get "/users/#{nonexistent_user_id}", headers: headers }
       it "returns a failure message" do
         expect(response.body).to eq("{\"message\":\"Couldn't find User\"}")
       end
