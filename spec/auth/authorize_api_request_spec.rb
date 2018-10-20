@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe AuthorizeApiRequest do
+RSpec.describe AuthorizeApiRequest, focus: true do
   let(:user) { create(:user) }
-  let(:header) { { 'Authorization' => token_generator(user.id) } }
+  let(:header) { { "Authorization" => token_generator(user.id) } }
 
-  subject(:valid_request_object) { described_class.new(header) }
+  subject(:valid_request_object) { AuthorizeApiRequest.new(header) }
   subject(:invalid_request_object) { described_class.new({}) }
 
   describe "#call" do
