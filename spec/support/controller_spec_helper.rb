@@ -4,12 +4,12 @@ module ControllerSpecHelper
   end
 
   def expired_token_generator(user_id)
-    JsonWebToken.encode({ user_id: user_id }, (Time.now.to_i - 500000000))
+    JsonWebToken.encode({ user_id: user_id }, 1.day.ago.to_i)
   end
 
   def valid_headers
     {
-      "Authorization" => token_generator(user.id),
+      "Authorization" => token_generator(create(:user).id),
       "Content-Type" => "application/json"
     }
  end

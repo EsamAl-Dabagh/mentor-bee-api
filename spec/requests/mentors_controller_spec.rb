@@ -1,8 +1,7 @@
 require "rails_helper"
 
-RSpec.describe MentorsController, type: :request, focus: true do
+RSpec.describe MentorsController, type: :request do
   let!(:mentors) { create_list(:mentor, 5) }
-  let(:user) { create(:user) }
   let(:headers) { valid_headers }
 
   describe "GET /mentors" do
@@ -42,7 +41,7 @@ RSpec.describe MentorsController, type: :request, focus: true do
     let(:user) { create(:user) }
 
     let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } }.to_json }
-    
+
     let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum" } }.to_json }
 
     context "request is valid" do
