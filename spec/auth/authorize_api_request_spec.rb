@@ -1,10 +1,10 @@
 require "rails_helper"
 
-RSpec.describe AuthorizeApiRequest do
+RSpec.describe AuthorizeApiRequest, focus: true do
   let(:user) { create(:user) }
   let(:header) { { "Authorization" => token_generator(user.id) } }
 
-  subject(:valid_request_object) { AuthorizeApiRequest.new(header) }
+  subject(:valid_request_object) { described_class.new(header) }
   subject(:invalid_request_object) { described_class.new({}) }
 
   describe "#call" do
@@ -12,6 +12,14 @@ RSpec.describe AuthorizeApiRequest do
       it "returns the user object" do
         result = valid_request_object.call
         expect(result[:user]).to eq(user)
+      end
+    end
+
+    context "when the request is invalid" do
+      context "if the token is missing" do
+        it "raises the MissingToken error" do
+          expect { invalid_request_object.call }.to raise_error(ExceptionHandler::MissingToken, "Missing token")
+        end
       end
     end
   end
