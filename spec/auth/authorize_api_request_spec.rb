@@ -21,6 +21,16 @@ RSpec.describe AuthorizeApiRequest, focus: true do
           expect { invalid_request_object.call }.to raise_error(ExceptionHandler::MissingToken, "Missing token")
         end
       end
+
+      context "when invalid token is given" do
+        subject(:invalid_request_object) do
+          described_class.new("Authorization" => token_generator(5))
+        end
+
+        it "raises the InvalidToken error" do
+          expect { invalid_request_object.call }.to raise_error(ExceptionHandler::InvalidToken, "Invalid token")
+        end
+      end
     end
   end
 end
