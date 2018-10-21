@@ -16,8 +16,6 @@ Clone this repo:
 ```
 $ git clone git@github.com:EsamAl-Dabagh/mentor-bee-api.git
 ```
-You will need the Rails master secret key in order to run the app. Ask us for the key! Copy it into a file: `config/master.key`
-
 Now, run setup:
 ```
 $ bin/setup
