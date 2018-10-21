@@ -4,9 +4,9 @@ RSpec.describe AuthenticateUser do
   let(:user) { create(:user) }
 
   subject(:valid_auth_obj) { described_class.new(user.email, user.password) }
-  subject(:invalid_auth_obj) { described_class.new('invalid', 'test') }
+  subject(:invalid_auth_obj) { described_class.new('test@test.com', 'test') }
 
-  describe '#get_user' do
+  describe 'call' do
     context 'when valid credentials' do
       it 'returns an auth token' do
         token = valid_auth_obj.call
@@ -20,7 +20,6 @@ RSpec.describe AuthenticateUser do
           .to raise_error(
             "Invalid credentials"
           )
-
       end
     end
   end
