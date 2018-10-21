@@ -1,8 +1,8 @@
 class JsonWebToken
-  SECRET_SIGNATURE = Rails.application.secrets.secret_key_base
+  SECRET_SIGNATURE = MentorBeeApi::Application.credentials.secret_key_base
 
   def self.encode(user, expiry = 24.hours.from_now)
-    user[:expiry] = expiry.to_i
+    user[:exp] = expiry.to_i
     JWT.encode(user, SECRET_SIGNATURE)
   end
 
@@ -10,7 +10,7 @@ class JsonWebToken
     body = JWT.decode(token, SECRET_SIGNATURE)[0]
     HashWithIndifferentAccess.new body
 
-  rescue JWT::DecodeError => error
-    raise ExceptionHandler::InvalidToken, error.message
+    rescue JWT::DecodeError => error
+      raise ExceptionHandler::InvalidToken, error.message
   end
 end
