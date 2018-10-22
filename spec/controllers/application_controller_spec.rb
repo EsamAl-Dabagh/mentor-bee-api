@@ -17,7 +17,7 @@ RSpec.describe ApplicationController, type: :controller do
     context "when authentication token is not given" do
       before { allow(request).to receive(:headers).and_return(tokenless_headers) }
 
-      it "sets the current user when authorized successfully" do
+      it "doesn't set current user when authorize unsuccessful" do
         expect { subject.instance_eval { authorize_request } }.to raise_error(ExceptionHandler::MissingToken, "Missing token")
       end
     end
