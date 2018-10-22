@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :mentees
   resources :mentorships
 
-  post 'auth/login', to: 'authentication#authenticate'
-  post 'signup', to: 'users#create'
+  post 'login', to: 'authentication#authenticate'
+  post 'register', to: 'users#create'
 
 end
