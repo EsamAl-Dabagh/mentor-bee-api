@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_19_162441) do
+ActiveRecord::Schema.define(version: 2018_10_22_142515) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +39,7 @@ ActiveRecord::Schema.define(version: 2018_10_19_162441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["mentee_id"], name: "index_mentorships_on_mentee_id"
+    t.index ["mentor_id", "mentee_id"], name: "index_mentorships_on_mentor_id_and_mentee_id", unique: true
     t.index ["mentor_id"], name: "index_mentorships_on_mentor_id"
   end
 
