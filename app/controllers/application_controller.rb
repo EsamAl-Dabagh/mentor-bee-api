@@ -9,5 +9,4 @@ class ApplicationController < ActionController::API
     def authorize_request
       @current_user = AuthorizeApiRequest.get_user(request.headers["Authorization"])
     end
-
 end
