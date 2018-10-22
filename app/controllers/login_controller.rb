@@ -1,4 +1,4 @@
-class AuthenticationController < ApplicationController
+class LoginController < ApplicationController
   skip_before_action :authorize_request, only: :authenticate
 
   def authenticate

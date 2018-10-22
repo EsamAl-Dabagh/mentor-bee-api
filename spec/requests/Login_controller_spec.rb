@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe AuthenticationController, type: :request do
+RSpec.describe LoginController, type: :request do
   describe "POST /login" do
     let!(:user) { create(:user) }
     let(:headers) { valid_headers.except("Authorization") }
