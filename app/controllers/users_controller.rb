@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     auth_token = AuthenticateUser.new(user.email, user.password).call
     json_response({
       auth_token: auth_token,
+      user_id: user.id,
       user_name: user.name,
       user_email: user.email,
       user_pic: user.pic
