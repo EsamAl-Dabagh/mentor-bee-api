@@ -12,6 +12,9 @@ RSpec.describe LoginController, type: :request do
       it "returns an authentication token" do
         expect(json["auth_token"]).not_to be_nil
       end
+      it "returns an user.email" do
+        expect(json["user_email"]).to eq(user.email)
+      end
     end
 
     context "When request is invalid" do
