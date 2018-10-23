@@ -1,7 +1,7 @@
 class MentorsController < ApplicationController
   def index
-    @mentors = Mentor.all
-    json_response(@mentors, :ok)
+    mentors = Mentor.all
+    json_response(all_mentors_data(mentors), :ok)
   end
 
   def create
@@ -18,4 +18,11 @@ class MentorsController < ApplicationController
     def mentor_params
       params.require(:mentor).permit(:user_id, :bio, :skill)
     end
+
+    def all_mentors_data(mentors)
+      mentors.each do |mentor|
+        {mentor_id: mentor.id, user_id: mentor.user_id, user_pic: mentor.user.pic, name: mentor.user.name, mentor_bio: mentor.bio, mentor_skill: mentor.skill}
+      end
+    end
+
 end
