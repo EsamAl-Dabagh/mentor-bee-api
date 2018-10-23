@@ -1,17 +1,17 @@
 class MentorsController < ApplicationController
   def index
     mentors = Mentor.all
-    json_response(all_mentors_data(mentors), :ok)
+    json_response("mentors" => all_mentors_data(mentors))
   end
 
   def create
-    @mentor = Mentor.create!(mentor_params)
-    json_response(@mentor, :created)
+    mentor = Mentor.create!(mentor_params)
+    json_response({ "mentor" => mentor_data(mentor) }, :created)
   end
 
   def show
-    @user = Mentor.find_by!(id: params[:id])
-    json_response(@user, :ok)
+    mentor = Mentor.find_by!(id: params[:id])
+    json_response("mentor" => mentor_data(mentor))
   end
 
   private
@@ -20,12 +20,17 @@ class MentorsController < ApplicationController
     end
 
     def all_mentors_data(mentors)
-      mentors.each do |mentor|
-        { mentor.id => { user_id: mentor.user_id, mentor_bio: mentor.bio, mentor_skill: mentor.skill, user_info: mentor_user_data(mentor) } }
-      end
+      mentors.map { |mentor| mentor_data(mentor) }
     end
 
-    def mentor_user_data(mentor)
-      { pic: User.find_by(id:mentor.user_id).pic, name: User.find_by(id: mentor.user_id) }
+    def mentor_data(mentor)
+      {
+        mentor_id: mentor.id,
+        user_id: mentor.user_id,
+        name: mentor.user.name,
+        pic: mentor.user.pic,
+        bio: mentor.bio,
+        skill: mentor.skill
+      }
     end
 end

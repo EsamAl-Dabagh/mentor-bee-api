@@ -38,20 +38,19 @@ class UsersController < ApplicationController
        }
     end
 
-    # def find_mentor_info(user)
-    #   {
-    #     mentor_id: user.mentor.id
-    #     mentor_bio: user.mentor.bio,
-    #     mentor_skill: user.mentor.skill,
-    #    }
-    # end
-    #
-    # def find_mentee_info(user)
-    #   {
-    #     mentee_id: user.mentee.id
-    #     mentee_bio: user.mentee.bio,
-    #     mentee_interest: user.mentee.interest
-    #    }
-    # end
-
+  # def find_mentor_info(user)
+  #   {
+  #     mentor_id: user.mentor.id
+  #     mentor_bio: user.mentor.bio,
+  #     mentor_skill: user.mentor.skill,
+  #    }
+  # end
+  #
+  # def find_mentee_info(user)
+  #   {
+  #     mentee_id: user.mentee.id
+  #     mentee_bio: user.mentee.bio,
+  #     mentee_interest: user.mentee.interest
+  #    }
+  # end
 end

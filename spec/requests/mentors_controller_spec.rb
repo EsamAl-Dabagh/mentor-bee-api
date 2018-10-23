@@ -1,15 +1,14 @@
 require "rails_helper"
 
-RSpec.describe MentorsController, type: :request, focus: true do
+RSpec.describe MentorsController, type: :request do
   let!(:mentors) { create_list(:mentor, 5) }
 
   describe "GET /mentors" do
     before { get "/mentors", params: {}, headers: valid_headers }
 
     it "returns mentors" do
-      p json
-      expect(json).not_to be_empty
-      expect(json.size).to eq(5)
+      expect(json["mentors"]).not_to be_empty
+      expect(json["mentors"].size).to eq(5)
     end
 
     it "returns status code 200" do
@@ -22,8 +21,9 @@ RSpec.describe MentorsController, type: :request, focus: true do
 
     context "request is valid" do
       before { get "/mentors/#{mentor.id}", params: {}, headers: valid_headers }
-      it "returns mentors" do
-        expect(json["skill"]).to eq(mentor.skill)
+
+      it "returns a mentor" do
+        expect(json["mentor"]["skill"]).to eq(mentor.skill)
       end
     end
     context "request is invalid" do
@@ -40,14 +40,14 @@ RSpec.describe MentorsController, type: :request, focus: true do
   describe "POST /mentors" do
     let(:user) { create(:user) }
 
-    let(:valid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" } }.to_json }
+    let(:valid_attributes) { { user_id: user.id, bio: "Expecto Patronum", skill: "Lumos" }.to_json }
 
-    let(:invalid_attributes) { { mentor: { user_id: user.id, bio: "Expecto Patronum" } }.to_json }
+    let(:invalid_attributes) { { user_id: user.id, bio: "Expecto Patronum" }.to_json }
 
     context "request is valid" do
       before { post "/mentors", params: valid_attributes, headers: valid_headers }
       it "creates a mentor" do
-        expect(json["skill"]).to eq("Lumos")
+        expect(json["mentor"]["skill"]).to eq("Lumos")
       end
       it "returns status code 201" do
         expect(response).to have_http_status(201)
