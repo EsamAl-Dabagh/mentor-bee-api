@@ -9,7 +9,7 @@ class LoginController < ApplicationController
       user_name: auth_token_user[1].name,
       user_email: auth_token_user[1].email,
       user_pic: auth_token_user[1].pic
-      })
+      }, :created )
   end
 
   private
