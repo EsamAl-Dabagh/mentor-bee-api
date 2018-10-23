@@ -21,8 +21,7 @@ class MentorsController < ApplicationController
 
     def all_mentors_data(mentors)
       mentors.each do |mentor|
-        {mentor_id: mentor.id, user_id: mentor.user_id, user_pic: mentor.user.pic, name: mentor.user.name, mentor_bio: mentor.bio, mentor_skill: mentor.skill}
+        { mentor_id: mentor.id, user_id: mentor.user_id, pic: mentor.user.pic, name: mentor.user.name, mentor_bio: mentor.bio, mentor_skill: mentor.skill }
       end
     end
-
 end
