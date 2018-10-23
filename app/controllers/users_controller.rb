@@ -1,12 +1,21 @@
 class UsersController < ApplicationController
+  skip_before_action :authorize_request, only: :create
+
   def index
     @users = User.all
     json_response(@users, :ok)
   end
 
   def create
-    @user = User.create!(user_params)
-    json_response(@user, :created)
+    user = User.create!(user_params)
+    auth_token = AuthenticateUser.new(user.email, user.password).call
+    json_response({
+      auth_token: auth_token,
+      user_id: user.id,
+      user_name: user.name,
+      user_email: user.email,
+      user_pic: user.pic
+      }, :created)
   end
 
   def show

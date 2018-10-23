@@ -16,6 +16,7 @@ gem 'puma', '~> 3.11'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -28,14 +29,15 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
+gem "faker"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem "rubocop"
   gem "rspec-rails"
-  gem "faker"
   gem "factory_bot_rails"
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -50,8 +52,4 @@ group :test do
   gem "simplecov-console", require: false
   gem "shoulda-matchers"
   gem "database_cleaner"
-end
-
-group :production do
-  gem "faker"
 end
