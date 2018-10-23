@@ -3,13 +3,13 @@ class LoginController < ApplicationController
 
   def authenticate
     auth_token_user = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
-    json_response({
+    json_response(
       auth_token: auth_token_user[0],
       user_id: auth_token_user[1].id,
       user_name: auth_token_user[1].name,
       user_email: auth_token_user[1].email,
       user_pic: auth_token_user[1].pic
-      })
+      )
   end
 
   private
