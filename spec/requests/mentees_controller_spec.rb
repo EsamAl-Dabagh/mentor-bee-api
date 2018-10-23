@@ -7,8 +7,8 @@ RSpec.describe MenteesController, type: :request do
     before { get "/mentees", params: {}, headers: valid_headers }
 
     it "returns mentees" do
-      expect(json).not_to be_empty
-      expect(json.size).to eq(5)
+      expect(json["mentees"]).not_to be_empty
+      expect(json["mentees"].size).to eq(5)
     end
 
     it "returns status code 200" do
@@ -22,7 +22,7 @@ RSpec.describe MenteesController, type: :request do
     context "request is valid" do
       before { get "/mentees/#{mentee.id}", params: {}, headers: valid_headers }
       it "returns mentees" do
-        expect(json["interest"]).to eq(mentee.interest)
+        expect(json["mentee"]["interest"]).to eq(mentee.interest)
       end
     end
     context "request is invalid" do
@@ -46,7 +46,7 @@ RSpec.describe MenteesController, type: :request do
     context "request is valid" do
       before { post "/mentees", params: valid_attributes, headers: valid_headers }
       it "creates a mentee" do
-        expect(json["interest"]).to eq("Lumos")
+        expect(json["mentee"]["interest"]).to eq("Lumos")
       end
       it "returns status code 201" do
         expect(response).to have_http_status(201)

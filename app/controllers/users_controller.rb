@@ -2,27 +2,23 @@ class UsersController < ApplicationController
   skip_before_action :authorize_request, only: :create
 
   def index
-    @users = User.all
-    json_response(@users, :ok)
+    users = User.all
+    json_response("users" => all_users_data(users))
   end
 
   def create
     user = User.create!(user_params)
-    auth_token = AuthenticateUser.new(user.email, user.password).call
     json_response(
       {
-        auth_token: auth_token[0],
-        user_id: user.id,
-        user_name: user.name,
-        user_email: user.email,
-        user_pic: user.pic
+        auth_token: JsonWebToken.encode(user_id: user.id),
+        user: user_data(user)
       },
       :created)
   end
 
   def show
     user = User.find_by!(id: params[:id])
-    json_response(user_data(user), :ok)
+    json_response("user" => user_data(user))
   end
 
   private
@@ -30,27 +26,16 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :pic)
     end
 
+    def all_users_data(users)
+      users.map { |user| user_data(user) }
+    end
+
     def user_data(user)
       {
         id: user.id,
         name: user.name,
+        email: user.email,
         pic: user.pic
        }
     end
-
-  # def find_mentor_info(user)
-  #   {
-  #     mentor_id: user.mentor.id
-  #     mentor_bio: user.mentor.bio,
-  #     mentor_skill: user.mentor.skill,
-  #    }
-  # end
-  #
-  # def find_mentee_info(user)
-  #   {
-  #     mentee_id: user.mentee.id
-  #     mentee_bio: user.mentee.bio,
-  #     mentee_interest: user.mentee.interest
-  #    }
-  # end
 end
