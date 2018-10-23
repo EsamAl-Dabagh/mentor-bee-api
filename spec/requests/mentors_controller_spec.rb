@@ -1,12 +1,13 @@
 require "rails_helper"
 
-RSpec.describe MentorsController, type: :request do
+RSpec.describe MentorsController, type: :request, focus: true do
   let!(:mentors) { create_list(:mentor, 5) }
 
   describe "GET /mentors" do
     before { get "/mentors", params: {}, headers: valid_headers }
 
     it "returns mentors" do
+      p json
       expect(json).not_to be_empty
       expect(json.size).to eq(5)
     end
