@@ -20,6 +20,12 @@ Now, run setup:
 ```
 $ bin/setup
 ```
+This will install dependencies and run database migrations.
+
+To start the server (defaults to port 3000):
+```
+$ rails s
+```
 
 ### Development:
 To run the linter and then the test suite:
