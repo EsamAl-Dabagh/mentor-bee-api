@@ -35,7 +35,17 @@ class UsersController < ApplicationController
         id: user.id,
         name: user.name,
         email: user.email,
-        pic: user.pic
+        pic: user.pic,
+        mentor_id: get_mentor_id(user),
+        mentee_id: get_mentee_id(user)
        }
+    end
+
+    def get_mentor_id(user)
+      return user.mentor.id if Mentor.find_by(user_id: user.id) || nil
+    end
+
+    def get_mentee_id(user)
+      return user.mentee.id if Mentee.find_by(user_id: user.id) || nil
     end
 end
