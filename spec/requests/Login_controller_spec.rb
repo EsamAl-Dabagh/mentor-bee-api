@@ -13,7 +13,7 @@ RSpec.describe LoginController, type: :request do
         expect(json["auth_token"]).not_to be_nil
       end
       it "returns an user.email" do
-        expect(json["user_email"]).to eq(user.email)
+        expect(json["email"]).to eq(user.email)
       end
     end
 

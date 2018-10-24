@@ -7,8 +7,8 @@ RSpec.describe UsersController, type: :request do
     before { get "/users", params: {}, headers: valid_headers }
 
     it "returns users" do
-      expect(json).not_to be_empty
-      expect(json.size).to eq(User.count)
+      expect(json["users"]).not_to be_empty
+      expect(json["users"].size).to eq(User.count)
     end
 
     it "returns status code 200" do
@@ -48,7 +48,7 @@ RSpec.describe UsersController, type: :request do
     context "when the user exists" do
       before { get "/users/#{user_id}", headers: valid_headers }
       it "returns a user" do
-        expect(json["id"]).to eq(user_id)
+        expect(json["user"]["id"]).to eq(user_id)
       end
       it "returns a status code 200" do
         expect(response).to have_http_status(200)
