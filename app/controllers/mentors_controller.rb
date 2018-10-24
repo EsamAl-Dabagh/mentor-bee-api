@@ -28,6 +28,7 @@ class MentorsController < ApplicationController
         mentor_id: mentor.id,
         user_id: mentor.user_id,
         name: mentor.user.name,
+        email: mentor.user.email,
         pic: mentor.user.pic,
         bio: mentor.bio,
         skill: mentor.skill

@@ -28,6 +28,7 @@ class MenteesController < ApplicationController
         mentee_id: mentee.id,
         user_id: mentee.user_id,
         name: mentee.user.name,
+        email: mentee.user.email,
         pic: mentee.user.pic,
         bio: mentee.bio,
         interest: mentee.interest

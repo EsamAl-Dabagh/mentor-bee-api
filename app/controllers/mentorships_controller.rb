@@ -24,7 +24,9 @@ class MentorshipsController < ApplicationController
         mentor_id: mentorship.mentor.id,
         mentee_id: mentorship.mentee.id,
         mentor_name: mentorship.mentor.user.name,
-        mentee_name: mentorship.mentee.user.name
+        mentor_email: mentorship.mentor.user.email,
+        mentee_name: mentorship.mentee.user.name,
+        mentee_email: mentorship.mentee.user.email
       }
     end
 end
