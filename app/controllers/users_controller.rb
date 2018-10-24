@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: :create
+  skip_before_action :authorize_request, only: [:create]
 
   def index
     users = User.all
@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.create!(user_params)
+    user.attach_avatar
     json_response(
       {
         auth_token: JsonWebToken.encode(user_id: user.id),
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :pic)
+      params.require(:user).permit(:name, :email, :password, :avatar)
     end
 
     def all_users_data(users)
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
         id: user.id,
         name: user.name,
         email: user.email,
-        pic: user.pic,
+        pic: (request.base_url + "/avatars/#{user.pic}"),
         mentor_id: get_mentor_id(user),
         mentee_id: get_mentee_id(user)
        }
