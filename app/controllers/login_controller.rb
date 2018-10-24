@@ -9,7 +9,11 @@ class LoginController < ApplicationController
         user_id: user.id,
         name: user.name,
         email: user.email,
-        pic: user.pic
+        pic: user.pic,
+        mentor_id: get_mentor(user)[:mentor_id],
+        mentor_bio: get_mentor(user)[:mentor_bio],
+        mentee_id: get_mentee(user)[:mentee_id],
+        mentee_bio: get_mentee(user)[:mentee_bio]
         }, :created)
     else
       raise(ExceptionHandler::AuthenticationError, "Invalid credentials")
@@ -20,5 +24,21 @@ class LoginController < ApplicationController
 
     def auth_params
       params.permit(:email, :password)
+    end
+
+    def get_mentor(user)
+      if Mentor.find_by(user_id: user.id)
+        { mentor_id: user.mentor.id, mentor_bio: user.mentor.bio }
+      else
+        { mentor_id: nil, mentor_bio: nil }
+      end
+    end
+
+    def get_mentee(user)
+      if Mentee.find_by(user_id: user.id)
+        { mentee_id: user.mentee.id, mentee_bio: user.mentee.bio }
+      else
+        { mentee_id: nil, mentee_bio: nil }
+      end
     end
 end
