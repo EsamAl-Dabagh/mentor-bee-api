@@ -6,8 +6,8 @@ RSpec.describe MentorshipsController, type: :request do
 
     before { get "/mentorships", params: {}, headers: valid_headers }
     it "returns mentorships" do
-      expect(json).not_to be_empty
-      expect(json.size).to eq(5)
+      expect(json["mentorships"]).not_to be_empty
+      expect(json["mentorships"].size).to eq(5)
     end
   end
 
@@ -20,7 +20,7 @@ RSpec.describe MentorshipsController, type: :request do
     context "request is valid" do
       before { post "/mentorships", params: valid_attributes, headers: valid_headers }
       it "creates a mentorship" do
-        expect(json["mentor_id"]).to eq(mentor.id)
+        expect(json["mentorship"]["mentor_id"]).to eq(mentor.id)
       end
       it "returns status code 201" do
         expect(response).to have_http_status(201)

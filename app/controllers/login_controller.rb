@@ -2,14 +2,18 @@ class LoginController < ApplicationController
   skip_before_action :authorize_request, only: :authenticate
 
   def authenticate
-    auth_token_user = AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
-    json_response({
-      auth_token: auth_token_user[0],
-      user_id: auth_token_user[1].id,
-      user_name: auth_token_user[1].name,
-      user_email: auth_token_user[1].email,
-      user_pic: auth_token_user[1].pic
-      }, :created)
+    user = User.find_by(email: auth_params[:email])
+    if user && user.authenticate(auth_params[:password])
+      json_response({
+        auth_token: JsonWebToken.encode(user_id: user.id),
+        user_id: user.id,
+        name: user.name,
+        email: user.email,
+        pic: user.pic
+        }, :created)
+    else
+      raise(ExceptionHandler::AuthenticationError, "Invalid credentials")
+    end
   end
 
   private
