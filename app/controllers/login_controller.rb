@@ -12,8 +12,10 @@ class LoginController < ApplicationController
         pic: user.pic,
         mentor_id: get_mentor(user)[:mentor_id],
         mentor_bio: get_mentor(user)[:mentor_bio],
+        mentor_skill: get_mentor(user)[:mentor_skill],
         mentee_id: get_mentee(user)[:mentee_id],
-        mentee_bio: get_mentee(user)[:mentee_bio]
+        mentee_bio: get_mentee(user)[:mentee_bio],
+        mentee_interest: get_mentee(user)[:mentee_interest]
         }, :created)
     else
       raise(ExceptionHandler::AuthenticationError, "Invalid credentials")
@@ -28,17 +30,17 @@ class LoginController < ApplicationController
 
     def get_mentor(user)
       if Mentor.find_by(user_id: user.id)
-        { mentor_id: user.mentor.id, mentor_bio: user.mentor.bio }
+        { mentor_id: user.mentor.id, mentor_bio: user.mentor.bio, mentor_skill: user.mentor.bio }
       else
-        { mentor_id: nil, mentor_bio: nil }
+        { mentor_id: nil, mentor_bio: nil, mentor_skill: nil }
       end
     end
 
     def get_mentee(user)
       if Mentee.find_by(user_id: user.id)
-        { mentee_id: user.mentee.id, mentee_bio: user.mentee.bio }
+        { mentee_id: user.mentee.id, mentee_bio: user.mentee.bio, mentee_interest: user.mentee.interest }
       else
-        { mentee_id: nil, mentee_bio: nil }
+        { mentee_id: nil, mentee_bio: nil, mentee_interest: nil }
       end
     end
 end
