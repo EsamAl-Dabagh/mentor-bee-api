@@ -9,7 +9,7 @@ class LoginController < ApplicationController
         user_id: user.id,
         name: user.name,
         email: user.email,
-        pic: user.pic,
+        pic: (request.base_url + "/avatars/#{user.pic}"),
         mentor_id: get_mentor(user)[:mentor_id],
         mentor_bio: get_mentor(user)[:mentor_bio],
         mentee_id: get_mentee(user)[:mentee_id],
