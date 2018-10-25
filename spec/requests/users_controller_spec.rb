@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe UsersController, type: :request do
+RSpec.describe UsersController do
   let!(:users) { create_list(:user, 5) }
 
   describe "GET /users" do
@@ -33,7 +33,7 @@ RSpec.describe UsersController, type: :request do
     context "when the request isn't valid" do
       before { post "/users", params: invalid_attributes }
       it "returns a failure message" do
-        expect(response.body).to eq("{\"message\":\"Validation failed: Password can't be blank, Password can't be blank, Email can't be blank\"}")
+        expect(response.body).to eq("{\"message\":\"Validation failed: Password can't be blank, Email can't be blank\"}")
       end
       it "returns status code 422" do
         expect(response).to have_http_status(422)

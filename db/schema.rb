@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_142515) do
+ActiveRecord::Schema.define(version: 2018_10_24_212722) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_142515) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.string "pic", default: "https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+    t.string "pic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
