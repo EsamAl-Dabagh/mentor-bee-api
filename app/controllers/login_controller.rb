@@ -30,7 +30,7 @@ class LoginController < ApplicationController
 
     def get_mentor(user)
       if Mentor.find_by(user_id: user.id)
-        { mentor_id: user.mentor.id, mentor_bio: user.mentor.bio, mentor_skill: user.mentor.bio }
+        { mentor_id: user.mentor.id, mentor_bio: user.mentor.bio, mentor_skill: user.mentor.skill }
       else
         { mentor_id: nil, mentor_bio: nil, mentor_skill: nil }
       end
