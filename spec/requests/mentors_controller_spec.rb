@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe MentorsController, type: :request do
+RSpec.describe MentorsController, type: :request  do
   let!(:mentors) { create_list(:mentor, 5) }
 
   describe "GET /mentors" do
