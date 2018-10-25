@@ -29,7 +29,7 @@ class MentorsController < ApplicationController
         user_id: mentor.user_id,
         name: mentor.user.name,
         email: mentor.user.email,
-        pic: mentor.user.pic,
+        pic: (request.base_url + "/avatars/#{user.pic}"),
         bio: mentor.bio,
         skill: mentor.skill
       }

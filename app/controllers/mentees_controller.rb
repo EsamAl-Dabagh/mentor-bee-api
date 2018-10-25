@@ -29,7 +29,7 @@ class MenteesController < ApplicationController
         user_id: mentee.user_id,
         name: mentee.user.name,
         email: mentee.user.email,
-        pic: mentee.user.pic,
+        pic: (request.base_url + "/avatars/#{user.pic}"),
         bio: mentee.bio,
         interest: mentee.interest
       }
