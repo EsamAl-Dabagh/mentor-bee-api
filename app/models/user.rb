@@ -7,7 +7,7 @@ class User < ApplicationRecord
   before_create :attach_avatar
 
   def attach_avatar
-    file_path = Dir.glob(Rails.root.join("public/avatars/*")).sample
+    file_path = Dir.glob(Rails.root.join("public/video_seed/*")).sample
     self.pic = File.basename(file_path)
   end
 end
