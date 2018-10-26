@@ -2,6 +2,8 @@
 
 ### Find the perfect mentor.
 
+[![Build Status](https://travis-ci.org/EsamAl-Dabagh/mentor-bee-api.svg?branch=master)](https://travis-ci.org/EsamAl-Dabagh/mentor-bee-api)
+
 **Front-End:** https://github.com/freddie1221/mentor-bee-frontend
 
 ### Created by:
